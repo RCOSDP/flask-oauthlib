@@ -2,7 +2,7 @@
 
 from cachelib import NullCache, SimpleCache, FileSystemCache
 from cachelib import MemcachedCache, RedisCache
-from flask_caching.backend.rediscache import RedisSentinelCache
+from flask_caching import RedisSentinelCache
 
 class Cache(object):
     def __init__(self, app, config_prefix='OAUTHLIB', **kwargs):
