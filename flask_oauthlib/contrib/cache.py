@@ -2,7 +2,7 @@
 
 from cachelib import NullCache, SimpleCache, FileSystemCache
 from cachelib import MemcachedCache, RedisCache
-
+from flask_chacing.backend.rediscache import RedisSentinelCache
 
 class Cache(object):
     def __init__(self, app, config_prefix='OAUTHLIB', **kwargs):
@@ -75,6 +75,17 @@ class Cache(object):
             key_prefix=self._config('KEY_PREFIX', None),
         ))
         return RedisCache(**kwargs)
+
+    def _redissentinel(self, **kwargs):
+        """Returns a :class:`RedisSentinelCache` instance"""
+        kwargs.update(dict(
+            sentinels=self._config('CACHE_REDIS_SENTINELS', [("127.0.0.1", 26379)]),
+            master=self._config('CACHE_REDIS_SENTINEL_MASTER', 'mymaster'),
+            password=self._config('CACHE_REDIS_PASSWORD', None),
+            db=self._config('CACHE_REDIS_DB', 0),
+            key_prefix=self._config('CACHE_KEY_PREFIX', None),
+        ))
+        return RedisSentinelCache(**kwargs)
 
     def _filesystem(self, **kwargs):
         """Returns a :class:`FileSystemCache` instance"""
