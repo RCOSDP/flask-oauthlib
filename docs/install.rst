@@ -31,7 +31,7 @@ Flask-OAuthlib is actively developed on GitHub, where the code is
 
 You can either clone the public repository::
 
-    git clone git://github.com/lepture/flask-oauthlib.git
+    git clone git+https://github.com/lepture/flask-oauthlib.git
 
 Download the `tarball <https://github.com/lepture/flask-oauthlib/tarball/master>`_::
 
